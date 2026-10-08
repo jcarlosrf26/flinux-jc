@@ -40,6 +40,7 @@ proyectos, a quienes corresponden el reconocimiento y las gracias:
   comunidad del kernel Linux. https://www.kernel.org/
 - **FLinux y sus aplicaciones FLFM, FLWriter, FLRadio, FLTV y FLTube** —
   **Facundo Adorno**: esta distro adapta su trabajo aguas arriba.
+  https://flinux.loc-os.com/
 - **FLWM** (Fast Light Window Manager) — **Bill Spitzak**.
   http://flwm.sourceforge.net/
 - **WireGuard** — **Jason A. Donenfeld**.
