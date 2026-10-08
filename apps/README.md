@@ -1,5 +1,8 @@
 # Programas propios y de terceros en la v1.5
 
+Los créditos completos de las aplicaciones y componentes integrados
+están en [CREDITOS.md](CREDITOS.md).
+
 ## Con repositorio propio (código GPL-3.0)
 
 - **FLConnect** (gestor VPN WireGuard/OpenVPN): https://github.com/jcarlosrf26/flconnect
