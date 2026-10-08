@@ -1,0 +1,33 @@
+FLWM con degradado de 3 colores — instalación en FLinux-JC v1.4 ya instalada
+============================================================================
+
+Qué es: parche de FLWM clásico (barra a la izquierda). Ventana activa:
+rojo sangre (#880808) arriba -> naranja fluorescente (#FF6700) al medio ->
+amarillo (#FFFF00) abajo. Ventana inactiva: mismo degradado, opaco (mezclado
+50% hacia gris). No toca FLConnect, no arma ISO, no es la v1.5.
+
+Archivos (descargar los 3 a la misma carpeta, ej. el home):
+  flwm.tcz          32 KB   MD5 0372d3e3803cb4af33bffbe0ff16abca
+  flwm.tcz.dep      (depende de fltk-1.3.tcz, ya presente en la v1.4)
+  flwm.tcz.md5.txt
+
+Pasos (terminal, en la carpeta donde bajaste los archivos):
+
+1. Verificar integridad:
+     md5sum -c flwm.tcz.md5.txt
+   Debe responder: flwm.tcz: OK
+
+2. Respaldar el flwm actual e instalar el parcheado:
+     sudo cp /etc/sysconfig/tcedir/optional/flwm.tcz /etc/sysconfig/tcedir/optional/flwm.tcz.bak
+     sudo cp flwm.tcz flwm.tcz.md5.txt flwm.tcz.dep /etc/sysconfig/tcedir/optional/
+
+3. Reiniciar:
+     sudo reboot
+
+   La v1.4 ya carga flwm.tcz desde onboot.lst, así que no hay que tocar
+   ningún list: al arrancar, el gestor de ventanas ya es el parcheado y es
+   permanente (el directorio optional está en disco).
+
+Para revertir:
+     sudo cp /etc/sysconfig/tcedir/optional/flwm.tcz.bak /etc/sysconfig/tcedir/optional/flwm.tcz
+     sudo reboot
