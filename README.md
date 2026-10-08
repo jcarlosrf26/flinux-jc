@@ -27,3 +27,28 @@ con FLConnect y flskin:
 Los componentes de terceros (Tiny Core Linux, el kernel Linux y los
 programas que la ISO empaqueta) conservan sus propias licencias y sus
 fuentes viven en sus proyectos originales.
+
+## Créditos
+
+Esta remasterización se construyó sobre el trabajo de otras personas y
+proyectos, a quienes corresponden el reconocimiento y las gracias:
+
+- **Tiny Core Linux** — creado por [Robert Shingledecker](http://tinycorelinux.net/)
+  y el equipo Tiny Core: es la base de esta remasterización.
+  http://tinycorelinux.net/
+- **Kernel Linux** — [Linus Torvalds](https://www.kernel.org/) y la
+  comunidad del kernel Linux. https://www.kernel.org/
+- **FLinux y sus aplicaciones FLFM, FLWriter, FLRadio, FLTV y FLTube** —
+  **Facundo Adorno**: esta distro adapta su trabajo aguas arriba.
+- **FLWM** (Fast Light Window Manager) — **Bill Spitzak**.
+  http://flwm.sourceforge.net/
+- **WireGuard** — **Jason A. Donenfeld**.
+  https://www.wireguard.com/
+- **Conky** — **Brenden Matthews** y el equipo Conky.
+  https://github.com/brndnmtthws/conky
+- **X.Org** — la [X.Org Foundation](https://www.x.org/).
+  https://www.x.org/
+
+Lo único que esta remasterización aporta es la integración de todo lo
+anterior para un Dell Inspiron 1545 concreto; el mérito del sistema y
+de sus programas es de sus autores.
