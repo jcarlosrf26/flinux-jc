@@ -7,9 +7,9 @@ escritos para esta remasterización: se agradece y acredita a sus autores.
 
 - **FLFM, FLWriter, FLRadio, FLTV y FLTube** — **Facundo Adorno**,
   autor de FLinux. En la v1.5 entran como paquetes `.tcz` de su
-  repositorio; esta distro solo los adapta (notas en
-  `build/prep/FLTV-PATCH-NOTES.md`, créditos y licencias según cada
-  paquete aguas arriba).
+  repositorio (https://flinux.loc-os.com/); esta distro solo los
+  adapta (notas en `build/prep/FLTV-PATCH-NOTES.md`, créditos y
+  licencias según cada paquete aguas arriba).
 
 ## Gestor de ventanas
 
