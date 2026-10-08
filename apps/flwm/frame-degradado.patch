@@ -1,0 +1,71 @@
+diff --git a/Frame.C b/Frame.C
+index a52d314..9db9696 100644
+--- a/Frame.C
++++ b/Frame.C
+@@ -1387,6 +1387,49 @@ void Frame::save_protocol() {
+ ////////////////////////////////////////////////////////////////
+ // Drawing code:
+ 
++// JC: degradado de 3 paradas para la barra de titulo (rama clasica,
++// barra vertical a la izquierda): rojo sangre arriba, naranja
++// fluorescente en el medio y amarillo abajo. La ventana inactiva
++// usa la misma rampa mezclada al 50% hacia el gris de fondo.
++static void jc_grad_color(double t, int active, int& r, int& g, int& b) {
++  static const int stops[3][3] = {
++    {0x88, 0x08, 0x08},  // rojo sangre #880808
++    {0xFF, 0x67, 0x00},  // naranja fluorescente #FF6700
++    {0xFF, 0xFF, 0x00}   // amarillo #FFFF00
++  };
++  int i = (t < 0.5) ? 0 : 1;
++  double u = (t < 0.5) ? t * 2.0 : (t - 0.5) * 2.0;
++  r = int(stops[i][0] + (stops[i+1][0] - stops[i][0]) * u + 0.5);
++  g = int(stops[i][1] + (stops[i+1][1] - stops[i][1]) * u + 0.5);
++  b = int(stops[i][2] + (stops[i+1][2] - stops[i][2]) * u + 0.5);
++  if (!active) { // version apagada del mismo degradado
++    r = (r + 0x90) / 2;
++    g = (g + 0x90) / 2;
++    b = (b + 0x90) / 2;
++  }
++}
++
++// Rellena el rectangulo (x,y,w,h) con el degradado vertical,
++// agrupando filas del mismo color para no saturar el servidor X.
++static void jc_fill_gradient(int x, int y, int w, int h, int active) {
++  if (w <= 0 || h <= 0) return;
++  int pr = -1, pg = -1, pb = -1, run_y = y;
++  for (int yy = 0; yy < h; yy++) {
++    double t = (h > 1) ? double(yy) / double(h - 1) : 0.0;
++    int r, g, b;
++    jc_grad_color(t, active, r, g, b);
++    if (r != pr || g != pg || b != pb) {
++      if (yy > 0) {
++        fl_color(uchar(pr), uchar(pg), uchar(pb));
++        fl_rectf(x, run_y, w, y + yy - run_y);
++      }
++      pr = r; pg = g; pb = b; run_y = y + yy;
++    }
++  }
++  fl_color(uchar(pr), uchar(pg), uchar(pb));
++  fl_rectf(x, run_y, w, y + h - run_y);
++}
++
+ #ifdef TOPSIDE
+ void Frame::draw() {
+   if (flag(NO_BORDER)) return;
+@@ -1431,14 +1474,8 @@ void Frame::draw() {
+   if (flag(NO_BORDER)) return;
+   //ML--------------------- Paint opaque titlebar background
+ 	  labelcolor(fl_contrast(FL_FOREGROUND_COLOR, FL_BACKGROUND2_COLOR));
+-	  if (active()) {
+-	 	 fl_rectf(2, 2, w() - 4, h()-4,
+-		 fl_color_average(FL_BACKGROUND2_COLOR, FL_WHITE, 0.6) ); // ML
+-        //(ACTIVE_COLOR >> 16) & 0xFF, (ACTIVE_COLOR >> 8) & 0xFF, ACTIVE_COLOR & 0xFF);
+-      }
+-      else {
+-        fl_rectf(2, 2, w() - 4, h()-4, FL_BACKGROUND2_COLOR); // ML
+-      }
++	  // JC: degradado de 3 colores en vez de color plano
++	  jc_fill_gradient(2, 2, w() - 4, h() - 4, active() ? 1 : 0);
+ 	  // ------------------ML
+ 
+   if (damage() != FL_DAMAGE_CHILD) {
